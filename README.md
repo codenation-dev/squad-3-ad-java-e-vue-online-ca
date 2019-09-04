@@ -4,7 +4,7 @@
 
 > A API da Central de Erros tem como objetivo centralizar registros de erros de aplicações.
 
-Este projeto tem como principais dependências:
+A API tem como principais dependências:
 
 - [Spring Data JPA](https://spring.io/projects/spring-data-jpa)
 - [Spring Security](https://spring.io/projects/spring-security)
