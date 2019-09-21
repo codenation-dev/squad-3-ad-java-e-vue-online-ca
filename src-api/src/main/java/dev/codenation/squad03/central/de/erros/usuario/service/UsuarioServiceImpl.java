@@ -1,7 +1,5 @@
 package dev.codenation.squad03.central.de.erros.usuario.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +19,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return this.usuarioRepository.save(usuario);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
-	public Optional<Usuario> findByEmail(String email) {
-		return Optional.ofNullable(this.usuarioRepository.findByEmail(email));
+	public Usuario findByEmail(String email) {
+		return this.usuarioRepository.findByEmail(email);
 	}
 
 }

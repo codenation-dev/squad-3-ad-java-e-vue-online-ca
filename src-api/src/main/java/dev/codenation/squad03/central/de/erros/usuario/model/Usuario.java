@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,8 +29,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-
 @Entity
 @Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }, name = "uk_email"))
 public class Usuario implements Serializable {
@@ -47,10 +44,9 @@ public class Usuario implements Serializable {
 
 	@Column(length = 8, nullable = false)
 	private String senha;
-
-//	@Enumerated(EnumType.STRING)
-//	@Column(length = 20, nullable = false)
-//	private Perfil perfil;
+	
+	@Column(length = 255, nullable = false)
+	private String token;
 
 	@Column(name = "data_criacao")
 	@Temporal(TemporalType.TIMESTAMP)

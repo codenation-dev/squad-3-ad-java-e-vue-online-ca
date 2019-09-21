@@ -14,8 +14,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * Classe responsável por definir as configurações do Swagger.
  * 
- * @since 22.08.2019
- * @version 1.0
+ * @since 21.09.2019
+ * @version 2.0
  *
  */
 @Configuration
@@ -25,7 +25,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket apit() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.codenation.central.erros.contract.controller"))
+				.apis(RequestHandlerSelectors.basePackage("dev.codenation.squad03.central.de.erros.usuario.controller"))
 				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(this.apiInfo());
