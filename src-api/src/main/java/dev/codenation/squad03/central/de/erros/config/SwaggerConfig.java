@@ -25,7 +25,7 @@ public class SwaggerConfig {
 	@Bean
 	public Docket apit() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("dev.codenation.squad03.central.de.erros.usuario.controller"))
+				.apis(RequestHandlerSelectors.basePackage("dev.codenation.squad03.central.de.erros"))
 				.paths(PathSelectors.any())
 				.build()
 				.apiInfo(this.apiInfo());

@@ -1,6 +1,7 @@
 package dev.codenation.squad03.central.de.erros.usuario.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,7 +16,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
-import lombok.AllArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,10 +32,9 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }, name = "uk_email"))
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = -80372305546386062L;
 
@@ -42,10 +45,10 @@ public class Usuario implements Serializable {
 	@Column(length = 255, nullable = false)
 	private String email;
 
-	@Column(length = 8, nullable = false)
+	@Column(length = 255, nullable = false)
 	private String senha;
 	
-	@Column(length = 255, nullable = false)
+	@Column(length = 255, nullable = true)
 	private String token;
 
 	@Column(name = "data_criacao")
@@ -56,6 +59,57 @@ public class Usuario implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataAtualizacao;
 
+	public Usuario(Long id, String email, String senha, String token, Date dataCriacao, Date dataAtualizacao) {
+		this.id = id;
+		this.email = email;
+		this.senha = senha;
+		this.token = token;
+		this.dataCriacao = dataCriacao;
+		this.dataAtualizacao = dataAtualizacao;
+	}
+	
+	@ApiModelProperty(hidden = true)
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public String getPassword() {
+		return this.senha;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public String getUsername() {
+		return this.email;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@ApiModelProperty(hidden = true)
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
 	@PrePersist
 	public void prePersiste() {
 		this.dataCriacao = new Date();
@@ -65,4 +119,5 @@ public class Usuario implements Serializable {
 	public void preUpdate() {
 		this.dataAtualizacao = new Date();
 	}
+
 }

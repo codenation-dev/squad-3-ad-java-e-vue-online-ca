@@ -1,12 +1,8 @@
 package dev.codenation.squad03.central.de.erros.usuario.model;
 
-import java.util.Collection;
-
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -23,14 +19,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UsuarioDTO implements UserDetails {
-
-	private static final long serialVersionUID = 8821614929654353714L;
+public class UsuarioDTO {
 
 	@ApiModelProperty(hidden = true)
 	private Long id;
 
-	@ApiModelProperty(example = "example@centraldeerros.com", name = "email", required = true)
+	@ApiModelProperty(example = "example@centraldeerros.com.br", name = "email", required = true)
 	@NotEmpty(message = "Email é obrigatório.")
 	private String email;
 
@@ -41,39 +35,4 @@ public class UsuarioDTO implements UserDetails {
 	
 	@ApiModelProperty(hidden = true)
 	private String token;
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
-
-	@Override
-	public String getPassword() {
-		return this.senha;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
 }

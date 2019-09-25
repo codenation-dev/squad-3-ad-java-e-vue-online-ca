@@ -1,6 +1,6 @@
 package dev.codenation.squad03.central.de.erros.usuario.service;
 
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * Classe responsável por manipular (encriptar e validar) a senha de um usuário.
@@ -21,9 +21,8 @@ public class UtilService {
 		if (password == null) {
 			return password;
 		} else {
-//			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//			return bCryptPasswordEncoder.encode(password);
-			return null;
+			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+			return bCryptPasswordEncoder.encode(password);
 		}
 	}
 
@@ -35,8 +34,7 @@ public class UtilService {
 	 * @return boolean
 	 */
 	public static boolean isSenhaValida(String password, String encodedPassword) {
-//		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//		return bCryptPasswordEncoder.matches(password, encodedPassword);
-		return false;
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder.matches(password, encodedPassword);
 	}
 }
