@@ -25,4 +25,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return this.usuarioRepository.findByEmail(email);
 	}
 
+	@Override
+	public Usuario logar(Usuario usuario) {		
+		return null;
+	}
+
 }
