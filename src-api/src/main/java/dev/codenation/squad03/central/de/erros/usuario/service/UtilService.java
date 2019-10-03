@@ -14,7 +14,7 @@ public class UtilService {
 	/**
 	 * Método responsável por gerar um hash utilizando BCrypt
 	 * 
-	 * @param senha
+	 * @param password
 	 * @return { @link String }
 	 */
 	public static String gerarBCrypt(String password) {
