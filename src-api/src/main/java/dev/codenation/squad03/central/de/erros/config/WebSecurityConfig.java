@@ -42,7 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-ui.html",
                 "/api/central-de-erros/v1/usuario/**",
                 "/api/central-de-erros/v1/login/**",
-                "/webjars/**");
+                "/webjars/**",
+                "/h2/**");
 	}
 	
 	@Bean

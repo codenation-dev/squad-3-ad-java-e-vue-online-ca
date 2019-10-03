@@ -1,12 +1,10 @@
 package dev.codenation.squad03.central.de.erros.usuario.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.codenation.squad03.central.de.erros.log.model.Log;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,10 +17,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import dev.codenation.squad03.central.de.erros.log.model.Log;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Classe que representa um usuário na API Central de Erros
@@ -34,8 +38,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = {
-    "email"}, name = "uk_email"))
+@Table(name = "usuario", uniqueConstraints = @UniqueConstraint(columnNames = {"email"}, name = "uk_email"))
 public class Usuario implements Serializable, UserDetails {
 
   private static final long serialVersionUID = -80372305546386062L;
