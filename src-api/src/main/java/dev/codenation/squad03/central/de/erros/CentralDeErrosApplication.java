@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CentralDeErrosApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CentralDeErrosApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(CentralDeErrosApplication.class, args);
+  }
 
 }

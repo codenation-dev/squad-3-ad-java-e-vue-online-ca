@@ -1,7 +1,10 @@
 package dev.codenation.squad03.central.de.erros.log.controller;
 
+import dev.codenation.squad03.central.de.erros.config.Message;
+import dev.codenation.squad03.central.de.erros.exception.ResourceNotFoundException;
 import dev.codenation.squad03.central.de.erros.log.model.Log;
 import dev.codenation.squad03.central.de.erros.log.service.LogService;
+import java.util.Arrays;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +33,16 @@ public class LogController {
   @Autowired
   private LogService logService;
 
-  @GetMapping
-  @ResponseBody
-  public ResponseEntity<?> findAll() {
-    return new ResponseEntity<>(
-        this.logService.findAll(),
-        HttpStatus.OK);
-  }
+  @Autowired
+  private Message message;
 
   @GetMapping(path = "/{id}")
   @ResponseBody
   public ResponseEntity<?> findById(@PathVariable Long id) {
     Optional<Log> optionalLog = this.logService.findById(id);
-    return new ResponseEntity<>(optionalLog, HttpStatus.OK);
+    Log log = optionalLog.orElseThrow(() -> new ResourceNotFoundException(
+        message.build("resource.not.found.for.identifier", Arrays.asList(id))));
+    return new ResponseEntity<>(log, HttpStatus.OK);
   }
 
   @PostMapping
@@ -51,4 +51,50 @@ public class LogController {
     return new ResponseEntity<>(this.logService.save(log), HttpStatus.ACCEPTED);
   }
 
+  @GetMapping
+  @ResponseBody
+  public ResponseEntity<?> findAll() {
+    return new ResponseEntity<>(
+        this.logService.findAll(),
+        HttpStatus.OK);
+  }
+
+  @GetMapping(path = "busca-por-ambiente/{ambiente}")
+  @ResponseBody
+  public ResponseEntity<?> findByAmbiente(@PathVariable String ambiente) {
+    return new ResponseEntity<>(
+        this.logService.findByAmbiente(ambiente),
+        HttpStatus.OK);
+  }
+
+  @GetMapping(path = "busca-por-ambiente-e-level/{ambiente}/{level}")
+  @ResponseBody
+  public ResponseEntity<?> filterByLevel(@PathVariable String ambiente,
+      @PathVariable String level) {
+    return new ResponseEntity<>(
+        this.logService.filterByLevel(ambiente, level),
+        HttpStatus.OK);
+  }
+
+  @GetMapping(path = "busca-por-ambiente-e-log/{ambiente}/{log}")
+  @ResponseBody
+  public ResponseEntity<?> filterByLog(@PathVariable String ambiente,
+      @PathVariable String log) {
+    return new ResponseEntity<>(
+        this.logService.filterByLog(ambiente, log),
+        HttpStatus.OK);
+  }
+
+  @PostMapping(path = "/arquivar/{id}")
+  @ResponseBody
+  public boolean arquivar(@PathVariable Long id) {
+    Log log = logService.findById(id).get();
+
+    if (log != null) {
+      log.setArquivar(true);
+      logService.save(log);
+      return true;
+    }
+    return false;
+  }
 }

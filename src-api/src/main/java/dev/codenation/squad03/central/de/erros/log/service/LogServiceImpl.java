@@ -33,4 +33,20 @@ public class LogServiceImpl implements LogService {
   public Log save(Log log) {
     return this.repository.save(log);
   }
+
+  @Override
+  public List<Log> findByAmbiente(String ambiente) {
+    return this.repository.findByAmbiente(ambiente);
+  }
+
+  @Override
+  public List<Log> filterByLevel(String ambiente, String level) {
+    return this.repository.filterByLevel(ambiente, level);
+  }
+
+  @Override
+  public List<Log> filterByLog(String ambiente, String log) {
+    return this.repository.filterByLog(ambiente, log);
+
+  }
 }

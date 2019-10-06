@@ -1,8 +1,6 @@
 package dev.codenation.squad03.central.de.erros.log.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.codenation.squad03.central.de.erros.usuario.model.Usuario;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -79,9 +76,5 @@ public class Log implements Serializable {
   @NotNull
   @JsonFormat
   private Boolean arquivar;
-
-  @ManyToOne
-  @JsonIgnore
-  private Usuario usuario;
 
 }

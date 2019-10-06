@@ -18,36 +18,36 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 @EnableAuthorizationServer
 @EnableResourceServer
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
-	@Bean
-	@Override
-	protected AuthenticationManager authenticationManager() throws Exception {
-		return super.authenticationManager();
-	}
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.userDetailsService).passwordEncoder(this.passwordEncoder());
-	}
-	
-	@Override
-	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/v2/api-docs",
-                "/configuration/ui",
-                "/swagger-resources/**",
-                "/configuration/security",
-                "/swagger-ui.html",
-                "/api/central-de-erros/v1/usuario/**",
-                "/api/central-de-erros/v1/login/**",
-                "/webjars/**",
-                "/h2/**");
-	}
-	
-	@Bean
-	public PasswordEncoder passwordEncoder () {
-		return NoOpPasswordEncoder.getInstance();
-	}
+  @Autowired
+  private UserDetailsService userDetailsService;
+
+  @Bean
+  @Override
+  protected AuthenticationManager authenticationManager() throws Exception {
+    return super.authenticationManager();
+  }
+
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth.userDetailsService(this.userDetailsService).passwordEncoder(this.passwordEncoder());
+  }
+
+  @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().antMatchers("/v2/api-docs",
+        "/configuration/ui",
+        "/swagger-resources/**",
+        "/configuration/security",
+        "/swagger-ui.html",
+        "/api/central-de-erros/v1/usuario/**",
+        "/api/central-de-erros/v1/login/**",
+        "/webjars/**",
+        "/h2/**");
+  }
+
+  @Bean
+  public PasswordEncoder passwordEncoder() {
+    return NoOpPasswordEncoder.getInstance();
+  }
 }

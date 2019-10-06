@@ -21,4 +21,11 @@ public interface LogService {
   public Optional<Log> findById(Long id);
 
   public Log save(Log log);
+
+  List<Log> findByAmbiente(String ambiente);
+
+  List<Log> filterByLevel(String ambiente, String level);
+
+  List<Log> filterByLog(String ambiente, String log);
+
 }
